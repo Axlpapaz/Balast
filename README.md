@@ -4,8 +4,11 @@ Commmands
 
 CONFIG
 Delay (sec) : you can type a number from 0,1 to infinity and that will be the interval count in seconds between each line
+
 Channel : choose which chat will the lines be broadcasted
+
 Enter the lines bellow. Each line seperates with "enter" 
+
 Save to keep the changes
 
 Use it by typing /balast or add the command /balast inside any macro you use
