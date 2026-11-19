@@ -28,3 +28,5 @@ That will say in /raid Blessing of Protection used on <your target's name> twice
 You can use any mouseover or different macro you want.
 
 There is a bult in spam protection. If you want to spam again you need to stop using the /balast command for 1,5 seconds
+
+Whisper support next upaded
