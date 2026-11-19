@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: Balast
+## Notes: Dynamic multi-line delayed chat macro tool.
+## Author: Mthlss
+## Version: 1.0
+## SavedVariables: BalastDB
+
+Balast.lua
