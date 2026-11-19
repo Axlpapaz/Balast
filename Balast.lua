@@ -30,6 +30,13 @@ local runner = CreateFrame("Frame")
 local queue = {}
 local timer = 0
 local isRunning = false
+local lastPress = 0
+local QUIET_TIME = 1.5  -- seconds with no /balast presses before it can start again
+
+local function Finish()
+    runner:SetScript("OnUpdate", nil)
+    isRunning = false
+end
 
 local function OnUpdate(self, elapsed)
     timer = timer + elapsed
@@ -39,19 +46,25 @@ local function OnUpdate(self, elapsed)
         if #queue > 0 then
             local msg = table.remove(queue, 1)
             if msg and msg ~= "" then
-                local channel = BalastDB.channel or "SAY"
-                SendChatMessage(msg, channel)
+                SendChatMessage(msg, BalastDB.channel or "SAY")
+            end
+            if #queue == 0 then
+                Finish()
             end
         else
-            runner:SetScript("OnUpdate", nil)
-            isRunning = false
+            Finish()
         end
     end
 end
 
 SLASH_BALAST1 = "/balast"
 SlashCmdList["BALAST"] = function()
+    local now = GetTime()
+    local sinceLast = now - lastPress
+    lastPress = now  -- every press counts, even ignored ones
+
     if isRunning then return end
+    if sinceLast < QUIET_TIME then return end  -- still spamming, ignore
     if not BalastDB or #BalastDB.lines == 0 then return end
 
     queue = {}
